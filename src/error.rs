@@ -1,8 +1,8 @@
-use aws_sdk_dynamodb::{error::QueryError, types::SdkError};
+use aws_sdk_dynamodb::types::SdkError;
 use axum::{http::StatusCode, response::IntoResponse, Json};
 use serde_json::json;
 
-#[derive(Debug)]
+#[allow(dead_code)]
 pub enum AppError {
     InvalidToken,
     WrongCredential,
@@ -16,7 +16,6 @@ pub enum AppError {
 
 impl IntoResponse for AppError {
     fn into_response(self) -> axum::response::Response {
-        let binding = "";
         let (status, err_msg) = match self {
             Self::InternalServerError => (
                 StatusCode::INTERNAL_SERVER_ERROR,

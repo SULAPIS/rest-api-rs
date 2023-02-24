@@ -2,12 +2,9 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use axum::{
     async_trait,
-    extract::{FromRequest, FromRequestParts},
-    headers::{
-        authorization::{self, Bearer},
-        Authorization,
-    },
-    http::{request::Parts, Request},
+    extract::FromRequestParts,
+    headers::{authorization::Bearer, Authorization},
+    http::request::Parts,
     RequestPartsExt, TypedHeader,
 };
 
@@ -24,8 +21,7 @@ pub fn get_timestamp_8_hours_from_now() -> u64 {
 }
 
 pub fn generate_token(email: &String) -> String {
-    let token = encode(&Header::default(), &email, &KEYS.encoding).unwrap();
-    token
+    encode(&Header::default(), &email, &KEYS.encoding).unwrap()
 }
 
 #[async_trait]

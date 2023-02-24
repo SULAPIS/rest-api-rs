@@ -40,7 +40,7 @@ pub async fn login(
         .map_err(|err| AppError::from(&err))?;
     if let Some(user) = query_result.items {
         let user: Vec<User> = from_items(user).map_err(|_err| AppError::InternalServerError)?;
-        if user.len() < 1 {
+        if user.is_empty() {
             return Err(AppError::UserDoeNotExist);
         }
 
